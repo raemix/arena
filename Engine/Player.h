@@ -22,6 +22,6 @@ private:
 
 public:
 	Player();
-	void Update(const Mouse& mouse);
+	void Update(const Keyboard& kbd);
 
 };

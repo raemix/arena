@@ -38,7 +38,7 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
-    player.Update(wnd.mouse);
+    player.Update(wnd.kbd);
     if (wnd.mouse.RightIsPressed())
     {
         missle.Init(player.getX(),
@@ -53,7 +53,7 @@ void Game::UpdateModel()
                     wnd.mouse.GetPosY());
     }
     if (missle.active) missle.Update();
-    if (enemy.isColliding(missle))
+    if (enemy.isColliding(missle) && missle.active)
     {
         enemy.Die();
         missle.Destroy();

@@ -12,25 +12,20 @@ void Player::Init(float X, float Y, int R, int G, int B, int SPEED, int W, int H
 	height = H;
 }
 
-void Player::Update(const Mouse& mouse)
+void Player::Update(const Keyboard& kbd)
 {
-	moveToMouseLeft(mouse);
 	// Stop if at target location
-	if (abs((int)x - targetLocationX) <= targetPadding)
-	{
+	
 
-		vx = 0.0f;
-	}
 
-	if (abs((int)y - targetLocationY) <= targetPadding)
-	{
-		vy = 0.0f;
-	}
-	if (abs((int)x - targetLocationX) <= targetPadding && abs((int)y - targetLocationY) <= targetPadding)
-	{
-		x = targetLocationX;
-		y = targetLocationY;
-	}
+	if (kbd.KeyIsPressed('W')) vy = -speed;
+	if (kbd.KeyIsPressed('S')) vy = speed;
+	if (kbd.KeyIsPressed('A')) vx = -speed;
+	if (kbd.KeyIsPressed('D')) vx = speed;
+
+	if (!kbd.KeyIsPressed('W') && !kbd.KeyIsPressed('S')) vy = 0;
+	if (!kbd.KeyIsPressed('A') && !kbd.KeyIsPressed('D')) vx = 0;
+
 
 	// Move player based on above info
 	if (vx > speed)

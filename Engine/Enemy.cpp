@@ -20,6 +20,12 @@ void Enemy::Init()
 
 void Enemy::Update(Player& player)
 {
+	targetLocationX = player.getX();
+	targetLocationY = player.getY();
+
+	moveTo(targetLocationX, targetLocationY);
+	x += vx;
+	y += vy;
 
 }
 
