@@ -1,29 +1,19 @@
 #include "Missle.h"
 
-Missle::Missle(float X, float Y, int R, int G, int B, int SPEED, int W, int H, const Mouse& mouse)
+Missle::Missle()
 {
-	Init( X,  Y,  R,  G,  B,  SPEED,  W,  H, mouse);
+	
 }
 
 void Missle::Destroy()
 {
-	delete this;
+	active = false;
+
 }
 
-void Missle::Update(const Keyboard& kbd, const Mouse& mouse)
+void Missle::Update()
 {
-	// Stop if at target location
-	if (abs((int)x - (int)targetLocationX) <= targetPadding)
-	{
-
-		vx = 0.0f;
-	}
-
-	if (abs((int)y - (int)targetLocationY) <= targetPadding)
-	{
-		vy = 0.0f;
-	}
-
+	
 	// Move player based on above info
 	if (vx > speed)
 		vx = speed;
@@ -55,7 +45,7 @@ void Missle::Update(const Keyboard& kbd, const Mouse& mouse)
 
 
 
-void Missle::Init(float X, float Y, int R, int G, int B, int SPEED, int W, int H, const Mouse& mouse)
+void Missle::Init(float X, float Y, int R, int G, int B, int SPEED, int W, int H, int targetX, int targetY)
 {
 	x = X;
 	y = Y;
@@ -65,6 +55,9 @@ void Missle::Init(float X, float Y, int R, int G, int B, int SPEED, int W, int H
 	speed = SPEED;
 	width = W;
 	height = H;
-	moveToMouseRight(mouse);
+	targetLocationX = targetX;
+	targetLocationY = targetY;
+	active = true;
+	moveTo(targetLocationX, targetLocationY);
 
 }

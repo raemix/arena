@@ -23,7 +23,9 @@
 #include "Keyboard.h"
 #include "Mouse.h"
 #include "Graphics.h"
+#include "Entity.h"
 #include "Player.h"
+#include "Missle.h"
 class Game
 {
 public:
@@ -40,6 +42,8 @@ private:
 private:
 	MainWindow& wnd;
 	Graphics gfx;
+
+public:
 	/********************************/
 	/*  User Variables              */
 	int x = 100;
@@ -48,6 +52,7 @@ private:
 	int h = 255;
 	int r = 0;
 	Player player;
+	Missle missle;
 	void drawBg(Graphics& gfx);
 
 	/********************************/

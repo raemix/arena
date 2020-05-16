@@ -27,23 +27,19 @@ void Entity::Draw(float X, float Y, Graphics& gfx)
 //	height = H;
 //}
 
-void Entity::moveToMouseLeft(const Mouse& mouse)
+
+void Entity::moveTo(float X, float Y)
 {
-	if (mouse.LeftIsPressed())
-	{
-		// Determine destination
-		targetLocationX = mouse.GetPosX();
-		targetLocationY = mouse.GetPosY();
-		moveX = (float)targetLocationX - x;
-		moveY = (float)targetLocationY - y;
+	// Determine destination
+	targetLocationX = (int)X;
+	targetLocationY = (int)Y;
+	moveX = (float)targetLocationX - x;
+	moveY = (float)targetLocationY - y;
 
-		// Calculate velocities
-		slope = sqrt((moveX * moveX) + (moveY * moveY));
-		vx = moveX / slope * speed;
-		vy = moveY / slope * speed;
-	}
-
-	
+	// Calculate velocities
+	slope = sqrt((moveX * moveX) + (moveY * moveY));
+	vx = moveX / slope * speed;
+	vy = moveY / slope * speed;
 }
 
 void Entity::moveToMouseRight(const Mouse& mouse)
@@ -51,18 +47,16 @@ void Entity::moveToMouseRight(const Mouse& mouse)
 	if (mouse.RightIsPressed())
 	{
 		// Determine destination
-		targetLocationX = mouse.GetPosX();
-		targetLocationY = mouse.GetPosY();
-		moveX = (float)targetLocationX - x;
-		moveY = (float)targetLocationY - y;
-
-		// Calculate velocities
-		slope = sqrt((moveX * moveX) + (moveY * moveY));
-		vx = moveX / slope * speed;
-		vy = moveY / slope * speed;
+		moveTo(mouse.GetPosX(), mouse.GetPosY());
+		
 	}
 
 	
+}
+
+void Entity::moveToMouseLeft(const Mouse& mouse)
+{
+	if (mouse.LeftIsPressed()) moveTo(mouse.GetPosX(), mouse.GetPosY());
 }
 
 //void Entity::Update()

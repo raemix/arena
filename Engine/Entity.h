@@ -42,5 +42,5 @@ public:
 	void Draw(float X, float Y, Graphics& gfx);
 	void moveToMouseRight(const Mouse& mouse);
 	void moveToMouseLeft(const Mouse& mouse);
-
+	void moveTo(float X, float Y);
 };

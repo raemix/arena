@@ -39,12 +39,27 @@ void Game::Go()
 void Game::UpdateModel()
 {
     player.Update(wnd.mouse);
+    if (wnd.mouse.RightIsPressed())
+    {
+        missle.Init(player.getX(),
+                    player.getY(),
+                    0,
+                    255,
+                    255,
+                    10,
+                    10,
+                    10,
+                    wnd.mouse.GetPosX(),
+                    wnd.mouse.GetPosY());
+    }
+    if (missle.active) missle.Update();
 }
 
 void Game::ComposeFrame()
 {
     //drawBg(gfx);
     player.Draw(player.getX(), player.getY(), gfx);
+    if (missle.active) missle.Draw(missle.getX(), missle.getY(),gfx);
 }
 
 void Game::drawBg(Graphics& gfx)
