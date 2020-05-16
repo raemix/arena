@@ -26,6 +26,10 @@
 #include "Entity.h"
 #include "Player.h"
 #include "Missle.h"
+#include "Enemy.h"
+
+
+
 class Game
 {
 public:
@@ -52,6 +56,7 @@ public:
 	int h = 255;
 	int r = 0;
 	Player player;
+	Enemy enemy;
 	Missle missle;
 	void drawBg(Graphics& gfx);
 

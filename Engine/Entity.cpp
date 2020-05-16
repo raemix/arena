@@ -1,5 +1,10 @@
 #include "Entity.h"
 
+void Entity::Draw(Graphics& gfx)
+{
+	Draw(x, y, gfx);
+}
+
 void Entity::Draw(float X, float Y, Graphics& gfx)
 {
 	int x = (int)X;
@@ -40,6 +45,15 @@ void Entity::moveTo(float X, float Y)
 	slope = sqrt((moveX * moveX) + (moveY * moveY));
 	vx = moveX / slope * speed;
 	vy = moveY / slope * speed;
+}
+
+bool Entity::isColliding(Entity& e)
+{
+	return 
+		x + width >= e.x &&
+		x <= e.x + e.width &&
+		y + height >= e.y &&
+		y <= e.y + e.height;
 }
 
 void Entity::moveToMouseRight(const Mouse& mouse)

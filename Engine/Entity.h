@@ -4,6 +4,8 @@
 #include "Mouse.h"
 #include "Keyboard.h"
 #include <ctgmath>
+#include "RMXRandom.h"
+
 
 class Entity
 {
@@ -39,8 +41,10 @@ public:
 	void setX(float X);
 	void setY(float Y);
 	//void Update();
+	void Draw(Graphics& gfx);
 	void Draw(float X, float Y, Graphics& gfx);
 	void moveToMouseRight(const Mouse& mouse);
 	void moveToMouseLeft(const Mouse& mouse);
 	void moveTo(float X, float Y);
+	bool isColliding(Entity& e);
 };

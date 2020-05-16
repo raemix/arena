@@ -53,13 +53,27 @@ void Game::UpdateModel()
                     wnd.mouse.GetPosY());
     }
     if (missle.active) missle.Update();
+    if (enemy.isColliding(missle))
+    {
+        enemy.Die();
+        missle.Destroy();
+    }
+    if (enemy.isAlive) enemy.Update(player);
+    if (!enemy.isAlive) 
+    {
+        if (getRandomNumber(0, enemy.spawnChance) == 73)
+        {
+            enemy.Init();
+        }
+    }
 }
 
 void Game::ComposeFrame()
 {
     //drawBg(gfx);
-    player.Draw(player.getX(), player.getY(), gfx);
-    if (missle.active) missle.Draw(missle.getX(), missle.getY(),gfx);
+    if (enemy.isAlive) enemy.Draw(gfx);
+    if (missle.active) missle.Draw(gfx);
+    player.Draw(gfx);
 }
 
 void Game::drawBg(Graphics& gfx)
