@@ -5,13 +5,17 @@
 #include "Keyboard.h"
 #include <ctgmath>
 #include "RMXRandom.h"
-
+#include "Vec2.h"
 
 class Entity
 {
+private:
+	//float x = 0.0f;
+	//float y = 0.0f;
+	Vec2 loc;
+	Vec2 vel;
+
 public:
-	float x = 0.0f;
-	float y = 0.0f;
 	int width = 15;
 	int height = 20;
 	int targetLocationX = 0;
@@ -28,7 +32,7 @@ public:
 	int blue  = 255;
 	int speed = 1;
 	int targetPadding = 2;
-
+	
 
 
 private:
@@ -36,10 +40,16 @@ private:
 
 
 public:
-	float getX();
-	float getY();
+	//float getX();
+	//float getY();
 	void setX(float X);
 	void setY(float Y);
+	float getVX();
+	float getVY();
+	void setVX(float in_vx);
+	void setVY(float in_vy);
+	Vec2 getVelocity();
+
 	//void Update();
 	void Draw(Graphics& gfx);
 	void Draw(float X, float Y, Graphics& gfx);
@@ -47,4 +57,7 @@ public:
 	void moveToMouseLeft(const Mouse& mouse);
 	void moveTo(float X, float Y);
 	bool isColliding(Entity& e);
+	Vec2 getLocation();
+	void setLocation(float in_x, float in_y);
+	void setLocation(Vec2& location);
 };

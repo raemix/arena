@@ -2,8 +2,8 @@
 
 void Player::Init(float X, float Y, int R, int G, int B, int SPEED, int W, int H)
 {
-	x = X;
-	y = Y;
+	setX(X);
+	setY(Y);
 	red = R;
 	green = G;
 	blue = B;
@@ -32,23 +32,23 @@ void Player::Update(const Keyboard& kbd)
 		vx = speed;
 	if (vy > speed)
 		vy = speed;
-	x += vx;
-	y += vy;
-	if (x <= 0.0f)
+	setX(getLocation().x + vx);
+	setY(getLocation().y + vy);
+	if (getLocation().x <= 0.0f)
 	{
-		x = 0.0f;
+		setX(0.0f);
 	}
-	if (x + width >= Graphics::ScreenWidth)
+	if (getLocation().x + width >= Graphics::ScreenWidth)
 	{
-		x = Graphics::ScreenWidth - width;
+		setX(Graphics::ScreenWidth - width);
 	}
-	if (y <= 0.0f)
+	if (getLocation().y <= 0.0f)
 	{
-		y = 0.0f;
+		setY(0.0f);
 	}
-	if (y + height >= Graphics::ScreenHeight)
+	if (getLocation().y + height >= Graphics::ScreenHeight)
 	{
-		y = Graphics::ScreenHeight - height;
+		setY(Graphics::ScreenHeight - height);
 	}
 }
 

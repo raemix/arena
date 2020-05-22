@@ -2,7 +2,7 @@
 
 void Entity::Draw(Graphics& gfx)
 {
-	Draw(x, y, gfx);
+	Draw(loc.x, loc.y, gfx);
 }
 
 void Entity::Draw(float X, float Y, Graphics& gfx)
@@ -38,22 +38,22 @@ void Entity::moveTo(float X, float Y)
 	// Determine destination
 	targetLocationX = (int)X;
 	targetLocationY = (int)Y;
-	moveX = (float)targetLocationX - x;
-	moveY = (float)targetLocationY - y;
+	moveX = (float)targetLocationX - getLocation().x;
+	moveY = (float)targetLocationY - getLocation().y;
 
 	// Calculate velocities
 	slope = sqrt((moveX * moveX) + (moveY * moveY));
-	vx = moveX / slope * speed;
-	vy = moveY / slope * speed;
+	setVX(moveX / slope * speed);
+	setVY(moveY / slope * speed);
 }
 
 bool Entity::isColliding(Entity& e)
 {
 	return 
-		x + width >= e.x &&
-		x <= e.x + e.width &&
-		y + height >= e.y &&
-		y <= e.y + e.height;
+		getLocation().x + width >= e.getLocation().x &&
+		getLocation().x <= e.getLocation().x + e.width &&
+		getLocation().y + height >= e.getLocation().y &&
+		getLocation().y <= e.getLocation().y + e.height;
 }
 
 void Entity::moveToMouseRight(const Mouse& mouse)
@@ -64,8 +64,6 @@ void Entity::moveToMouseRight(const Mouse& mouse)
 		moveTo(mouse.GetPosX(), mouse.GetPosY());
 		
 	}
-
-	
 }
 
 void Entity::moveToMouseLeft(const Mouse& mouse)
@@ -79,22 +77,64 @@ void Entity::moveToMouseLeft(const Mouse& mouse)
 
 
 
-float Entity::getX()
+Vec2 Entity::getLocation()
 {
-	return x;
+	return loc;
 }
 
-float Entity::getY()
+void Entity::setLocation(float in_x, float in_y)
 {
-	return y;
+	loc.x = in_x;
+	loc.y = in_y;
+}
+
+void Entity::setLocation(Vec2& location)
+{
+	loc.x = location.x;
+	loc.y = location.y;
+}
+
+Vec2 Entity::getVelocity()
+{
+	return Vec2(getVX(), getVY());
+}
+
+//float Entity::getX()
+//{
+//	return loc.x;
+//}
+//
+//float Entity::getY()
+//{
+//	return loc.y;
+//}
+
+float Entity::getVX()
+{
+	return vel.x;
+}
+
+float Entity::getVY()
+{
+	return vel.y;
+}
+
+void Entity::setVX(float in_vx)
+{
+	vel.x = in_vx;
+}
+
+void Entity::setVY(float in_vy)
+{
+	vel.y = in_vy;
 }
 
 void Entity::setX(float X)
 {
-	x = X;
+	loc.x = X;
 }
 
 void Entity::setY(float Y)
 {
-	y = Y;
+	loc.y = Y;
 }

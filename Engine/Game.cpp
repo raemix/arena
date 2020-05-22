@@ -20,6 +20,7 @@
  ******************************************************************************************/
 #include "MainWindow.h"
 #include "Game.h"
+#include "Vec2.h"
 
 Game::Game( MainWindow& wnd )
 	:
@@ -39,10 +40,10 @@ void Game::Go()
 void Game::UpdateModel()
 {
     player.Update(wnd.kbd);
-    if (wnd.mouse.RightIsPressed())
+    if (wnd.mouse.RightIsPressed() && !missle.active)
     {
-        missle.Init(player.getX(),
-                    player.getY(),
+        missle.Init(player.getLocation().x,
+                    player.getLocation().y,
                     0,
                     255,
                     255,

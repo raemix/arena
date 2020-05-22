@@ -15,30 +15,30 @@ void Missle::Update()
 {
 	
 	// Move player based on above info
-	if (vx > speed)
-		vx = speed;
-	if (vy > speed)
-		vy = speed;
-	x += vx;
-	y += vy;
-	if (x <= 0.0f)
+	if (getVX() > speed)
+		setVX(speed);
+	if (getVY() > speed)
+		setVY(speed);
+	setX(getLocation().x + getVX());
+	setY(getLocation().y + getVY());
+	if (getLocation().x <= 0.0f - width)
 	{
-		x = 0.0f;
+		//x = 0.0f;
 		Destroy();
 	}
-	if (x + width >= Graphics::ScreenWidth)
+	if (getLocation().x + width >= Graphics::ScreenWidth)
 	{
-		x = Graphics::ScreenWidth - width;
+		//x = Graphics::ScreenWidth - width;
 		Destroy();
 	}
-	if (y <= 0.0f)
+	if (getLocation().y <= 0.0f)
 	{
-		y = 0.0f;
+		//y = 0.0f;
 		Destroy();
 	}
-	if (y + height >= Graphics::ScreenHeight)
+	if (getLocation().y + height >= Graphics::ScreenHeight)
 	{
-		y = Graphics::ScreenHeight - height;
+		//y = Graphics::ScreenHeight - height;
 		Destroy();
 	}
 }
@@ -47,16 +47,16 @@ void Missle::Update()
 
 void Missle::Init(float X, float Y, int R, int G, int B, int SPEED, int W, int H, int targetX, int targetY)
 {
-	x = X;
-	y = Y;
+	setX(X);
+	setY(Y);
 	red = R;
 	green = G;
 	blue = B;
 	speed = SPEED;
 	width = W;
 	height = H;
-	targetLocationX = targetX;
-	targetLocationY = targetY;
+	targetLocationX = (float)targetX;
+	targetLocationY = (float)targetY;
 	active = true;
 	moveTo(targetLocationX, targetLocationY);
 
